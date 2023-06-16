@@ -9,24 +9,22 @@ function Debit()
     const[amount, set_amount] = useState("")
     const[category, set_category] = useState("")
     const[savings, set_savings] = useState(1000)
-    const[debit, set_debit] = useState([{}]);
+    const[credit, set_credit] = useState([{}]);
    
-    
     function myfunc(e)
     {
         set_amount(e);
-        viewfunc();
         var save = document.getElementById("Savings_amount")
-        var amt = savings - e;
+        var amt = savings + (e*1);
         save.innerHTML = amt;
     }
     const handleSubmit = async(e) => {
         e.preventDefault();
 
         let result = await fetch(
-            'http://localhost:4000/insert', {
+            'http://localhost:4000/insert_credit', {
                 method: "post",
-                body: JSON.stringify({ date, amount, category}),
+                body: JSON.stringify({ date, amount}),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -44,13 +42,13 @@ function Debit()
     }
     function viewfunc()
     {
-        document.getElementById('debits').style.display = 'block';
+        document.getElementById('credits').style.display = 'block';
         let result = fetch(
-            'http://localhost:4000/expense')
+            'http://localhost:4000/earnings')
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                set_debit(data);
+                set_credit(data);
             })
             .catch(err => {
                 console.log(err);
@@ -65,7 +63,7 @@ function Debit()
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
                 <link rel="stylesheet" href="App.css"></link>
             </head>
-            <body className='debit_page'>
+            <body className='credit_page'>
             <div className='container-fluid myclass'>
                 <form id='my_form' onSubmit={handleSubmit}>
                     <div class="form-group">
@@ -76,33 +74,20 @@ function Debit()
                         <label for="number">Amount</label>
                         <input type="number" class="form-control" id="amount" placeholder="0" min="0" onChange={(e) => {myfunc(e.target.value)}}></input>
                     </div>
-                    <div class="form-group">
-                        <label for="category">Select Category :</label>
-                        <select class="form-control" id="cat1"  onChange={(e) => {set_category(e.target.value)}}>
-                            <option>Click to select your category : </option>
-                            <option value="Travel">Travel</option>
-                            <option value="Accessories">Accessories</option>
-                            <option value="Gadgets">Gadgets</option>
-                            <option value="Food">Food</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
                     <button type="submit" class="btn btn-primary" onSubmit={myfunc}>Submit</button>
-                    <button type="submit" class="btn btn-primary" onClick={viewfunc}>View</button>
+                    <button type="reset" className='btn btn-primary' onClick={viewfunc}>View</button>
                     <h1 id="Savings_amount">{savings}</h1>
-                    <table id='debits' className='center'>
+                    <table id='credits' className='center'>
                         <tr>
                             <th>Date</th>
                             <th>Amount</th>
-                            <th>Category</th>
                         </tr>
                         {
-                                debit.map(i=>{
+                                credit.map(i=>{
                                     return(
                                         <tr>
                                             <td>{i.date}</td>
                                             <td>{i.amount}</td>
-                                            <td>{i.category}</td>
                                         </tr>
                                     )
                                 })

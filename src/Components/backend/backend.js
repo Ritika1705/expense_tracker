@@ -67,6 +67,17 @@
             }
         });
         
+        app.get('/earnings', async(req, res) => {
+
+            try{
+                let credits = await Credit.find();
+                res.send(credits);
+            }
+            catch(err)
+            {
+                console.log(error);
+            }
+        });
 
         app.post('/insert', async(req, res) => {
             console.log(req.body);
@@ -87,6 +98,22 @@
                 console.log(err)
             }
         });
+
+        app.post('/insert_credit', async(req,res) => {
+            const date = req.body.date
+            const amount = req.body.amount
+
+            const formData = new Credit({
+                date: date,
+                amount: amount
+            })
+            try{
+                await formData.save();
+                res.send(req.body)
+            }catch(err) {
+                console.log(err)
+            }
+        })
 
         app.listen(port, () => {
             console.log(`Server started on port ${port}`);
