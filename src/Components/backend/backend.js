@@ -63,9 +63,45 @@
             }
             catch(err)
             {
-                console.log(error);
+                console.log(err);
             }
         });
+
+        app.get('/total_debits',async(req, res) => {
+            try
+            {
+                let debits = await Debit.find();
+                var sum = 0;
+                debits.map(i => {
+                
+                    sum = sum + i.amount;
+                })
+                console.log(sum);
+                res.send("Total debit : " + sum);
+            }
+            catch(err)
+            {
+                console.log(err);
+            }
+        })
+
+        app.get('/total_credits',async(req, res) => {
+            try
+            {
+                let credits = await Credit.find();
+                var sum = 0;
+                credits.map(i => {
+                
+                    sum = sum + i.amount;
+                })
+                console.log(sum);
+                res.send("Total credit : " + sum);
+            }
+            catch(err)
+            {
+                console.log(err);
+            }
+        })
         
         app.get('/earnings', async(req, res) => {
 

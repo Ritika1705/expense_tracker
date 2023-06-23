@@ -1,5 +1,5 @@
 import '../App.css';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { ReactDOM } from 'react';
 import Axios from 'axios';
 
@@ -10,19 +10,35 @@ function Debit()
     const[category, set_category] = useState("")
     const[savings, set_savings] = useState(1000)
     const[debit, set_debit] = useState([{}]);
+    const[expenditure,set_expenditure] = useState("");
    
-    
+    useEffect(() => {
+        total_debit();
+    }, [])
+
+
+    function total_debit()
+    {
+        let debit_statement = fetch('http://localhost:4000/total_debits').then(function(response) {
+            return response.text();
+          }).then(function(data) {
+            console.log(data); // this will be a string
+            set_expenditure(data);
+        });
+        
+
+    }
+
     function myfunc(e)
     {
         set_amount(e);
-        viewfunc();
         var save = document.getElementById("Savings_amount")
         var amt = savings - e;
-        save.innerHTML = amt;
+        //save.innerHTML = amt;
     }
+
     const handleSubmit = async(e) => {
         e.preventDefault();
-
         let result = await fetch(
             'http://localhost:4000/insert', {
                 method: "post",
@@ -41,11 +57,15 @@ function Debit()
                 set_savings(savings);
                 document.getElementById('my_form').reset();
         }
+
+        total_debit();
+
     }
     function viewfunc()
     {
         document.getElementById('debits').style.display = 'block';
-        let result = fetch(
+        
+        let result2 = fetch(
             'http://localhost:4000/expense')
             .then(response => response.json())
             .then(data => {
@@ -56,7 +76,14 @@ function Debit()
                 console.log(err);
             })
             //set_debit(result);
-            console.log(result);
+            console.log(result2);
+
+            debit.map(i => {
+                
+                //expenditure = expenditure + i.amount;
+                console.log(i.amount);
+                set_expenditure(expenditure + i.amount);
+            })
     }
     return(
         <>
@@ -89,7 +116,7 @@ function Debit()
                     </div>
                     <button type="submit" class="btn btn-primary" onSubmit={myfunc}>Submit</button>
                     <button type="submit" class="btn btn-primary" onClick={viewfunc}>View</button>
-                    <h1 id="Savings_amount">{savings}</h1>
+                    <h1 id="Savings_amount">{expenditure}</h1>
                     <table id='debits' className='center'>
                         <tr>
                             <th>Date</th>

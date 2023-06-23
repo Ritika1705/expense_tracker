@@ -1,5 +1,5 @@
 import '../App.css';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { ReactDOM } from 'react';
 import Axios from 'axios';
 
@@ -10,13 +10,30 @@ function Debit()
     const[category, set_category] = useState("")
     const[savings, set_savings] = useState(1000)
     const[credit, set_credit] = useState([{}]);
+    const[income,set_income] = useState("");
+
+    useEffect(() => {
+        total_credit();
+    }, [])
+
+    function total_credit()
+    {
+        let credit_statement = fetch('http://localhost:4000/total_credits').then(function(response) {
+            return response.text();
+          }).then(function(data) {
+            console.log(data); // this will be a string
+            set_income(data);
+        });
+        
+
+    }
    
     function myfunc(e)
     {
         set_amount(e);
         var save = document.getElementById("Savings_amount")
         var amt = savings + (e*1);
-        save.innerHTML = amt;
+        //save.innerHTML = amt;
     }
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -39,6 +56,7 @@ function Debit()
                 set_savings(savings);
                 document.getElementById('my_form').reset();
         }
+        total_credit();
     }
     function viewfunc()
     {
@@ -76,7 +94,7 @@ function Debit()
                     </div>
                     <button type="submit" class="btn btn-primary" onSubmit={myfunc}>Submit</button>
                     <button type="reset" className='btn btn-primary' onClick={viewfunc}>View</button>
-                    <h1 id="Savings_amount">{savings}</h1>
+                    <h1 id="Savings_amount">{income}</h1>
                     <table id='credits' className='center'>
                         <tr>
                             <th>Date</th>
