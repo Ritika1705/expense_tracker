@@ -78,12 +78,7 @@ function Debit()
             //set_debit(result);
             console.log(result2);
 
-            debit.map(i => {
-                
-                //expenditure = expenditure + i.amount;
-                console.log(i.amount);
-                set_expenditure(expenditure + i.amount);
-            })
+            
     }
     return(
         <>
@@ -92,19 +87,19 @@ function Debit()
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
                 <link rel="stylesheet" href="App.css"></link>
             </head>
-            <body className='debit_page'>
-            <div className='container-fluid myclass'>
+            <body className='debit_page home_body'>
+            <div className='container-fluid myclass center-screen'>
                 <form id='my_form' onSubmit={handleSubmit}>
                     <div class="form-group">
-                        <label for="date">Date</label>
+                        <label for="date" className='credit_form'>Date</label>
                         <input type="date" class="form-control" id="date" placeholder="Date" onChange={(e) => {set_date(e.target.value)}}></input>
                     </div>
                     <div class="form-group">
-                        <label for="number">Amount</label>
+                        <label for="number" className='credit_form'>Amount</label>
                         <input type="number" class="form-control" id="amount" placeholder="0" min="0" onChange={(e) => {myfunc(e.target.value)}}></input>
                     </div>
                     <div class="form-group">
-                        <label for="category">Select Category :</label>
+                        <label for="category" className='credit_form'>Select Category :</label>
                         <select class="form-control" id="cat1"  onChange={(e) => {set_category(e.target.value)}}>
                             <option>Click to select your category : </option>
                             <option value="Travel">Travel</option>
@@ -114,9 +109,11 @@ function Debit()
                             <option value="Other">Other</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" onSubmit={myfunc}>Submit</button>
-                    <button type="submit" class="btn btn-primary" onClick={viewfunc}>View</button>
-                    <h1 id="Savings_amount">{expenditure}</h1>
+                    <button type="submit" class="btn btn-primary glow-on-hover" onSubmit={myfunc}>Submit</button>
+                    <button type="submit" class="btn btn-primary glow-on-hover" onClick={viewfunc}>View</button>
+                    <div className='centre-text'>
+                        <h1 id="Savings_amount">{expenditure}</h1>
+                    </div>
                     <table id='debits' className='center'>
                         <tr>
                             <th>Date</th>

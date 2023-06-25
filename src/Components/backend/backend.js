@@ -102,6 +102,38 @@
                 console.log(err);
             }
         })
+
+        app.get('/daily_spendings', async(req, res) => {
+            try
+            {
+                var date = req.query.date;
+                var query = "date: ISODate('" +  date + "')"
+                console.log(query);
+                let daily_credit = await Credit.find({date: new Date(date)});
+                var credit_sum=0;
+                daily_credit.map( i => {
+                    credit_sum = credit_sum + i.amount;
+                })
+
+                let daily_debit = await Debit.find({date: new Date(date)});
+                var debit_sum=0;
+                daily_debit.map( i => {
+                    debit_sum= debit_sum + i.amount;
+                })
+
+                console.log(credit_sum);
+                res.setHeader('Content-type','text/html')
+                res.send("Total credit : " + credit_sum + " &" + " Total debit : " + debit_sum);
+                //res.send();
+                console.log(debit_sum);
+                
+
+            }
+            catch(err)
+            {
+                console.log(err);
+            }
+        })
         
         app.get('/earnings', async(req, res) => {
 

@@ -60,7 +60,7 @@ function Debit()
     }
     function viewfunc()
     {
-        document.getElementById('credits').style.display = 'block';
+        document.getElementById('debits').style.display = 'block';
         let result = fetch(
             'http://localhost:4000/earnings')
             .then(response => response.json())
@@ -81,21 +81,24 @@ function Debit()
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
                 <link rel="stylesheet" href="App.css"></link>
             </head>
-            <body className='credit_page'>
-            <div className='container-fluid myclass'>
+            <body className='credit_page home_body'>
+            <div className='center-screen'>
                 <form id='my_form' onSubmit={handleSubmit}>
-                    <div class="form-group">
-                        <label for="date">Date</label>
+                    <div class="form-group ">
+                        <label for="date" className='credit_form'>Date</label>
                         <input type="date" class="form-control" id="date" placeholder="Date" onChange={(e) => {set_date(e.target.value)}}></input>
                     </div>
                     <div class="form-group">
-                        <label for="number">Amount</label>
+                        <label for="number" className='credit_form'>Amount</label>
                         <input type="number" class="form-control" id="amount" placeholder="0" min="0" onChange={(e) => {myfunc(e.target.value)}}></input>
                     </div>
-                    <button type="submit" class="btn btn-primary" onSubmit={myfunc}>Submit</button>
-                    <button type="reset" className='btn btn-primary' onClick={viewfunc}>View</button>
-                    <h1 id="Savings_amount">{income}</h1>
-                    <table id='credits' className='center'>
+                    <button type="submit" class="btn btn-primary glow-on-hover" onSubmit={myfunc}>Submit</button>
+                    <button type="reset" className='btn btn-primary glow-on-hover' onClick={viewfunc}>View</button>
+            
+                    <div className='centre-text'>
+                            <h1 id="Savings_amount">{income}</h1>
+                    </div>
+                    <table id='debits' className='center'>
                         <tr>
                             <th>Date</th>
                             <th>Amount</th>
@@ -113,8 +116,7 @@ function Debit()
                         
                     </table>
                 </form>
-                
-            </div>
+                </div>
             </body>
         </>
     )
