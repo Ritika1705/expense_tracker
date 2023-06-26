@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import { ReactDOM } from 'react';
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 
 function Home()
 {
@@ -15,6 +16,7 @@ function Home()
                 <link rel="stylesheet" href="App.css"></link>
             </head>
             <body className='home_body'>
+                <Navbar />
                 <div class="center-screen">
                     <button type="submit" class="btn btn-primary glow-on-hover" onClick={() => navigate("/Credit")}>Credit</button>
                     <button type="submit" class="btn btn-primary glow-on-hover" onClick={() => navigate("/Debit")}>Debit</button>

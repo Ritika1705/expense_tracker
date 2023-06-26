@@ -2,6 +2,7 @@ import '../App.css';
 import React, {useState, useEffect} from 'react';
 import { ReactDOM } from 'react';
 import Axios from 'axios';
+import Navbar from './Navbar';
 
 function Debit()
 {
@@ -88,6 +89,7 @@ function Debit()
                 <link rel="stylesheet" href="App.css"></link>
             </head>
             <body className='debit_page home_body'>
+            <Navbar />
             <div className='container-fluid myclass center-screen'>
                 <form id='my_form' onSubmit={handleSubmit}>
                     <div class="form-group">

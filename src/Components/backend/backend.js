@@ -123,8 +123,20 @@
 
                 console.log(credit_sum);
                 res.setHeader('Content-type','text/html')
-                res.send("Total credit : " + credit_sum + " &" + " Total debit : " + debit_sum);
-                //res.send();
+
+                if(debit_sum > credit_sum)
+                {
+                    res.send("Uh No ! You spent " + debit_sum + " rupees and earned " + credit_sum + " . Net savings = " + (credit_sum-debit_sum) + " rupees");
+                }
+                else if(credit_sum > debit_sum)
+                {
+                    res.send("Good job ! You saved : " + (credit_sum-debit_sum) + " rupees. Debit amount = " + debit_sum + " & Credit amount = " + credit_sum );
+                }
+                else if(credit_sum == debit_sum)
+                {
+                    res.send("You saved 0 rupees today. Total debit: " + debit_sum + " rupees. Total credit : " + credit_sum + " rupees");
+                }
+
                 console.log(debit_sum);
                 
 

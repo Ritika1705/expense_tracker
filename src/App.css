@@ -15,12 +15,16 @@
 }
 
 .center-screen {
-  display: flex;
+  display:flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
 
+.navbar-ul{
+  color:#00ffd5;
+  
+}
 .credit_form{
   color: wheat;
   padding-bottom: 10px;
@@ -108,4 +112,26 @@
   0% { background-position: 0 0; }
   50% { background-position: 400% 0; }
   100% { background-position: 0 0; }
+}
+
+.outer {
+  background-color:#000;
+  display: table;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.inner {
+  margin-left: auto;
+  margin-right: auto;
+  width: 400px;
+  /* Whatever width you want */
 }
