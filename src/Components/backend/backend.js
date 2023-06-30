@@ -200,4 +200,42 @@
         });
 
      
-     
+     app.get('/travel_expense', async(req, res) => {
+
+        try
+            {
+                var date = req.query.date;
+                //console.log(query);
+                let travel_expense = await Debit.find({category: "Travel"});
+                var travel_debit_sum=0;
+                travel_expense.map( i => {
+                    travel_debit_sum = travel_debit_sum + i.amount;
+                })
+                console.log(travel_debit_sum);
+                res.send(travel_debit_sum.toString());
+            }
+            catch(err)
+            {
+                console.log(err);
+            }
+     });
+
+     app.get('/food_expense', async(req, res) => {
+
+        try
+            {
+                var date = req.query.date;
+                //console.log(query);
+                let food_expense = await Debit.find({category: "Food"});
+                var food_debit_sum=0;
+                food_expense.map( i => {
+                    food_debit_sum = food_debit_sum + i.amount;
+                })
+                console.log(food_debit_sum);
+                res.send(food_debit_sum.toString());
+            }
+            catch(err)
+            {
+                console.log(err);
+            }
+     });
