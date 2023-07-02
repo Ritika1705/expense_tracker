@@ -12,14 +12,14 @@ function Navbar()
                 <link rel="stylesheet" href="App.css"></link>
             </head>
             <body>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-ul">
+            <nav class="navbar navbar-expand-lg navbar-light navbar-ul navbar-custom">
                 <a class="navbar-brand" href="#"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse navbar-ul" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav mr-auto" id="custom_list">
                         <li class="nav-item">
                             <a class="nav-link" href="/">Home</a>
                         </li>
@@ -31,6 +31,9 @@ function Navbar()
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/Daily-Savings">Daily Savings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Transactions">Transactions</a>
                         </li>
                     </ul>
                 </div>

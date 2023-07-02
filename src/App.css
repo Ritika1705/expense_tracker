@@ -25,9 +25,18 @@
   padding-top: 30px;
 }
 
+.navbar{
+  background-color: lightgreen;
+  color: #00ffd5;
+}
+
+nav .navbar-nav li a{
+  color: blue;
+}
 
 .home_body{
   background-color: #000;
+  min-height: 100vh;
 }
 .glow-on-hover {
   margin: 20px;

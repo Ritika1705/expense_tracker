@@ -239,3 +239,63 @@
                 console.log(err);
             }
      });
+
+     app.get('/accessories_expense', async(req, res) => {
+
+        try
+            {
+                var date = req.query.date;
+                //console.log(query);
+                let accessories_expense = await Debit.find({category: "Accessories"});
+                var acccessories_debit_sum=0;
+                accessories_expense.map( i => {
+                    acccessories_debit_sum = acccessories_debit_sum+ i.amount;
+                })
+                console.log(acccessories_debit_sum);
+                res.send(acccessories_debit_sum.toString());
+            }
+            catch(err)
+            {
+                console.log(err);
+            }
+     });
+
+     app.get('/gadget_expense', async(req, res) => {
+
+        try
+            {
+                var date = req.query.date;
+                //console.log(query);
+                let gadget_expense = await Debit.find({category: "Gadgets"});
+                var gadget_debit_sum=0;
+                gadget_expense.map( i => {
+                    gadget_debit_sum = gadget_debit_sum+ i.amount;
+                })
+                console.log(gadget_debit_sum);
+                res.send(gadget_debit_sum.toString());
+            }
+            catch(err)
+            {
+                console.log(err);
+            }
+     });
+
+     app.get('/other_expense', async(req, res) => {
+
+        try
+            {
+                var date = req.query.date;
+                //console.log(query);
+                let other_expense = await Debit.find({category: "Other"});
+                var other_debit_sum=0;
+                other_expense.map( i => {
+                    other_debit_sum = other_debit_sum+ i.amount;
+                })
+                console.log(other_debit_sum);
+                res.send(other_debit_sum.toString());
+            }
+            catch(err)
+            {
+                console.log(err);
+            }
+     });
